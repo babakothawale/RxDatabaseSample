@@ -1,5 +1,6 @@
 package com.rx.database.db;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 
 import com.rx.database.models.Shop;
@@ -12,11 +13,11 @@ public class Tables {
         static String _ID = "_id";
     }
 
-    static class Shop extends BaseColumn {
-        static String TABLE_NAME = "shop";
+    public static class Shop extends BaseColumn {
+        public static String TABLE_NAME = "shop";
 
-        static String NAME = "shop_name";
-        static String ADDRESS = "shop_address";
+        public static String NAME = "shop_name";
+        public static String ADDRESS = "shop_address";
 
         public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "("
                 + _ID + " INTEGER PRIMARY KEY," + NAME + " TEXT,"
@@ -30,5 +31,27 @@ public class Tables {
                 return new com.rx.database.models.Shop(id, name, address);
             }
         };
+
+        public static class Builder {
+            private ContentValues values;
+            public Builder(){
+                values = new ContentValues();
+            }
+
+            public Builder name(String shopName){
+                values.put(NAME, shopName);
+                return this;
+            }
+
+
+            public Builder address(String shopAddress){
+                values.put(ADDRESS, shopAddress);
+                return this;
+            }
+
+            public ContentValues build(){
+                return values;
+            }
+        }
     }
 }

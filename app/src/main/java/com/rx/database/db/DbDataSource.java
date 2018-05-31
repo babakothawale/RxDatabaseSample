@@ -10,10 +10,27 @@ import java.util.concurrent.Callable;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 
+
+//TODO: delete all rows of a table
+//TODO: pagination support
+//TODO: single row insert
+//TODO: single row retrieve
+
 public class DbDataSource {
+    private static DbDataSource _sInstance;
     private Database db;
 
-    public DbDataSource(Context context) {
+    public static DbDataSource getInstance(Context context) {
+        if (_sInstance == null) {
+            synchronized (DbDataSource.class) {
+                _sInstance = new DbDataSource(context);
+            }
+        }
+
+        return _sInstance;
+    }
+
+    private DbDataSource(Context context) {
         db = new Database(context);
     }
 
@@ -45,12 +62,13 @@ public class DbDataSource {
         }).subscribeOn(Schedulers.io());
     }
 
-    public Observable<Cursor> query(final String query) {
-        return Observable.fromCallable(new Callable<Cursor>() {
-            @Override
-            public Cursor call() throws Exception {
-                return db.query(query);
-            }
-        }).subscribeOn(Schedulers.io());
+    public CursorObservable query(final String query) {
+        return new CursorObservable(Observable.fromCallable(new Callable<Cursor>() {
+                    @Override
+                    public Cursor call() throws Exception {
+                        return db.query(query);
+                    }
+                })
+        );
     }
 }

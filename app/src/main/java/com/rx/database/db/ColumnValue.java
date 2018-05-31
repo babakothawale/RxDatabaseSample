@@ -3,15 +3,13 @@ package com.rx.database.db;
 import android.database.Cursor;
 
 public final class ColumnValue {
-  public static final int BOOLEAN_FALSE = 0;
-  public static final int BOOLEAN_TRUE = 1;
 
   public static String getString(Cursor cursor, String columnName) {
     return cursor.getString(cursor.getColumnIndexOrThrow(columnName));
   }
 
   public static boolean getBoolean(Cursor cursor, String columnName) {
-    return getInt(cursor, columnName) == BOOLEAN_TRUE;
+    return getInt(cursor, columnName) == 1;
   }
 
   public static long getLong(Cursor cursor, String columnName) {

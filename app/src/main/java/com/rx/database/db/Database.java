@@ -5,21 +5,19 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.List;
 
-public class Database extends SQLiteOpenHelper {
-
+class Database extends SQLiteOpenHelper {
     // Database Version
     private static final int DATABASE_VERSION = 1;
-
     // Database Name
     private static final String DATABASE_NAME = "shopsInfo";
 
-    // Contacts table name
-    private static final String TABLE_SHOPS = "shops";
+    private static final String TAG = "Database";
 
-    public Database(Context context) {
+    Database(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -31,7 +29,7 @@ public class Database extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SHOPS);
+        db.execSQL("DROP TABLE IF EXISTS " + Tables.Shop.TABLE_NAME);
         // Creating tables again
         onCreate(db);
     }
@@ -39,8 +37,10 @@ public class Database extends SQLiteOpenHelper {
     public void insert(String table, List<ContentValues> data) {
         //TODO: implement bulk insert
         SQLiteDatabase db = getWritableDatabase();
+        long rowid;
         for (ContentValues v : data) {
-            db.insert(table, null, v);
+            rowid = db.insert(table, null, v);
+            Log.d(TAG, "insert: id : " + rowid);
         }
     }
 
