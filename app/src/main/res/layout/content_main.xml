@@ -9,11 +9,46 @@
     tools:showIn="@layout/activity_main">
 
     <Button
-        android:id="@+id/button_loadList"
-        android:layout_width="wrap_content"
+        android:id="@+id/button_insert_shop"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Load List"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:text="Insert shop detail"
+        app:layout_constraintTop_toTopOf="parent"
+       />
+
+    <Button
+        android:id="@+id/button_insert_owner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="insert owner detail"
+        app:layout_constraintTop_toBottomOf="@id/button_insert_shop"
+        />
+
+
+    <Button
+        android:id="@+id/button_loadList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get shop info"
+        app:layout_constraintTop_toBottomOf="@id/button_insert_owner"
+       />
+
+    <Button
+        android:id="@+id/button_owner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Owner info"
+        app:layout_constraintTop_toBottomOf="@id/button_loadList"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="#fff"
+        android:paddingBottom="200dp"
+        app:layout_constraintTop_toBottomOf="@id/button_owner"
+        />
 
 
 

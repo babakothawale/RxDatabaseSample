@@ -24,12 +24,14 @@ class Database extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(Tables.Shop.CREATE_TABLE);
+        db.execSQL(Tables.Owner.CREATE_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + Tables.Shop.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + Tables.Owner.TABLE_NAME_OWNER);
         // Creating tables again
         onCreate(db);
     }
