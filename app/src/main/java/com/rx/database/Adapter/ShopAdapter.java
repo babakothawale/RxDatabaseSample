@@ -39,8 +39,6 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
         holder.click(data.get(position), listener);
         holder.tvName.setText(data.get(position).getName());
         holder.tvAddress.setText(data.get(position).getAddress());
-
-
     }
 
 
